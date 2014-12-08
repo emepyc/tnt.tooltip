@@ -10,7 +10,7 @@ var tooltip = function () {
     var conf = {
 	background_color : "white",
 	foreground_color : "black",
-	position : "auto",
+	position : "right",
 	allow_drag : true,
 	show_closer : true,
 	fill : function () { throw "fill is not defined in the base object" },
@@ -56,24 +56,12 @@ var tooltip = function () {
 	}
 	var mouse = d3.mouse(container.node());
 	d3.event = null;
-	var offset;
-	switch (conf.position) {
-	case "right" :
-	    offset = 0;
-	    break;
-	case "left" :
-	    offset = conf.width;
-	    break;
-	case "auto" :
-	    var from = mouse[0];
-	    var to = mouse[0] + conf.width;
-	    if (to > window.innerWidth) {
-		offset = to - window.innerWidth + 20
-	    } else {
-		offset = 0
-	    }
-	}
 
+	var offset = 0;
+	if (conf.position === "left") {
+	    offset = conf.width;
+	}
+	
 	tooltip_div.attr("id", "tnt_tooltip_" + t.get_name(data));
 	
 	// We place the tooltip
@@ -107,7 +95,7 @@ var tooltip = function () {
     var api = apijs(t)
 	.getset(conf);
     api.check('position', function (val) {
-	return (val === 'left') || (val === 'right') || (val === 'auto');
+	return (val === 'left') || (val === 'right');
     }, "Only 'left' or 'right' values are allowed for position");
 
     api.method('close', function () {
