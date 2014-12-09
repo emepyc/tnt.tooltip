@@ -1,6 +1,6 @@
 {
   "name": "tnt.tooltip",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Tooltip library for TnT",
   "main": "index.js",
   "directories": {
@@ -60,7 +60,6 @@
     }
   },
   "dependencies": {
-    "blanket": "^1.1.6",
-    "underscore": "^1.7.0"
+     "tnt.api": "^0.0.0"
   }
 }

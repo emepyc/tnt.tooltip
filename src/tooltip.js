@@ -1,5 +1,4 @@
-var apijs = require("../../tnt.api/index.js");
-var utils = require("../../tnt.utils/index.js");
+var apijs = require("tnt.api");
 
 var tooltip = function () {
     "use strict";
