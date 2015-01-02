@@ -1,10 +1,3 @@
-/*
- * tnt.newick
- * https://github.com/emepyc/tnt.newick
- *
- * Copyright (c) 2014 Miguel Pignatelli
- * Licensed under the Apache 2 license.
- */
 
 var gulp   = require('gulp');
 var jshint = require('gulp-jshint');
@@ -43,7 +36,7 @@ gulp.task('default', ['lint', 'test', 'coveralls', 'build-browser', 'build-brows
 gulp.task('sass', function () {
     return gulp.src('./src/scss/*scss')
 	.pipe(sass())
-	.pipe(gulp.dest('./build/css'));
+	.pipe(gulp.dest(buildDir));
 });
 
 gulp.task('lint', function() {
@@ -82,8 +75,6 @@ gulp.task('init', ['clean'], function() {
     if (err) console.error(err)
   });
 });
-
-// sass
 
 // browserify debug
 gulp.task('build-browser',['init', 'sass'], function() {
