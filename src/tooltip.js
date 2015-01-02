@@ -13,7 +13,8 @@ var tooltip = function () {
 	allow_drag : true,
 	show_closer : true,
 	fill : function () { throw "fill is not defined in the base object" },
-	width : 180
+	width : 180,
+	id : 1
     };
 
     var t = function (data, event) {
@@ -48,7 +49,7 @@ var tooltip = function () {
 	    .call(drag);
 
 	// prev tooltips with the same header
-	d3.select("#tnt_tooltip_" + t.get_name(data)).remove();
+	d3.select("#tnt_tooltip_" + conf.id).remove();
 
 	if ((d3.event === null) && (event)) {
 	    d3.event = event;
@@ -61,14 +62,12 @@ var tooltip = function () {
 	    offset = conf.width;
 	}
 	
-	tooltip_div.attr("id", "tnt_tooltip_" + t.get_name(data));
+	tooltip_div.attr("id", "tnt_tooltip_" + conf.id);
 	
 	// We place the tooltip
 	tooltip_div
 	    .style("left", (mouse[0] - offset) + "px")
 	    .style("top", mouse[1] + "px");
-	// .style("left", mouseX)
-	// .style("top", mouseY);
 
 	// Close
 	if (conf.show_closer) {
@@ -99,10 +98,6 @@ var tooltip = function () {
 
     api.method('close', function () {
 	tooltip_div.remove();
-    });
-
-    api.method('get_name', function (obj) {
-	return obj.header.replace(/ |:|\.|\(|\)/g, '_');
     });
 
     return t;
