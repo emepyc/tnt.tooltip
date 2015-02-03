@@ -36,7 +36,7 @@ var tooltip = function () {
 	// It looks like if we anchor the tooltip in the "body"
 	// The tooltip is not located in the right place (appears at the bottom)
 	// See clients/tooltips_test.html for an example
-	var container = d3.select(this).selectAncestor("div");
+	var container = d3.select(selectAncestor(this, "div"));
 	if (container === undefined) {
 	    // We require a div element at some point to anchor the tooltip
 	    return
@@ -90,6 +90,23 @@ var tooltip = function () {
 	return t;
     };
 
+    // gets the first ancestor of elem having tagname "type"
+    // example : var mydiv = selectAncestor(myelem, "div");
+    function selectAncestor (elem, type) {
+	type = type.toLowerCase();
+	if (elem.parentNode === null) {
+	    console.log("No more parents");
+	    return undefined;
+	}
+	var tagName = elem.parentNode.tagName;
+
+	if ((tagName !== undefined) && (tagName.toLowerCase() === type)) {
+	    return elem.parentNode;
+	} else {
+	    return selectAncestor (elem.parentNode, type);
+	}
+    }
+    
     var api = apijs(t)
 	.getset(conf);
     api.check('position', function (val) {
