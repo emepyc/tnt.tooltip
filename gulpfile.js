@@ -58,9 +58,7 @@ gulp.task('coveralls', function() {
 });
 
 gulp.task('watch', function() {
-   gulp.watch(['./src/**/*.js','./lib/**/*.js', './test/**/*.js'], function() {
-     gulp.run('test');
-   });
+    gulp.watch(['./src/**/*.js','./lib/**/*.js', './test/**/*.js'], ['build-browser-min', 'lint', 'test']);
 });
 
 
