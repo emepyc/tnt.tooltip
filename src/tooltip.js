@@ -54,7 +54,7 @@ var tooltip = function () {
 	if ((d3.event === null) && (event)) {
 	    d3.event = event;
 	}
-	var mouse = d3.mouse(container.node());
+	var mouse = [d3.event.clientX, d3.event.clientY];
 	d3.event = null;
 
 	var offset = 0;
