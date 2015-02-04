@@ -12,7 +12,7 @@ var tooltip = function () {
 	position : "right",
 	allow_drag : true,
 	show_closer : true,
-	fill : function () { throw "fill is not defined in the base object" },
+	fill : function () { throw "fill is not defined in the base object"; },
 	width : 180,
 	id : 1
     };
@@ -22,13 +22,13 @@ var tooltip = function () {
 	    .origin(function(){
 		return {x:parseInt(d3.select(this).style("left")),
 			y:parseInt(d3.select(this).style("top"))
-		       }
+		       };
 	    })
 	    .on("drag", function() {
 		if (conf.allow_drag) {
 		    d3.select(this)
 			.style("left", d3.event.x + "px")
-			.style("top", d3.event.y + "px")
+			.style("top", d3.event.y + "px");
 		}
 	    });
 
@@ -39,8 +39,8 @@ var tooltip = function () {
 	var container = d3.select(selectAncestor(this, "div"));
 	if (container === undefined) {
 	    // We require a div element at some point to anchor the tooltip
-	    return
-	};
+	    return;
+	}
 
 	tooltip_div = container
 	    .append("div")
@@ -152,14 +152,18 @@ tooltip.table = function () {
 
 	table_rows
 	    .append("th")
-	    .html(function(d,i) {return obj.rows[i].label});
+	    .html(function(d,i) {
+		return obj.rows[i].label;
+	    });
 
 	table_rows
 	    .append("td")
-	    .html(function(d,i) {return obj.rows[i].value})
+	    .html(function(d,i) {
+		return obj.rows[i].value;
+	    })
 	    .each(function (d) {
 		if (d.link === undefined) {
-		    return
+		    return;
 		}
 		d3.select(this)
 		    .classed("link", 1)
@@ -197,11 +201,11 @@ tooltip.plain = function () {
 	    .attr("class", "tnt_zmenu_row")
 	    .append("td")
 	    .style("text-align", "center")
-	    .html(obj.body)
+	    .html(obj.body);
     });
 
     return t;
-}
+};
 
 // TODO: This shouldn't be exposed in the API. It would be better to have as a local variable
 // or alternatively have the images somewhere else (although the number of hardcoded images should be left at a minimum)
