@@ -1,0 +1,4 @@
+0.0.5
+	- Taking into account relative positioned parents
+	- Exporting 'tooltip' in the browser version
+	- Added example (in examples folder)

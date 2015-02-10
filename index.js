@@ -1,1 +1,1 @@
-module.exports = require("./src/tooltip.js");
+module.exports = tooltip = require("./src/tooltip.js");
