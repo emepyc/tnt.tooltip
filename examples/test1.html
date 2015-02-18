@@ -19,6 +19,13 @@
   var obj = {};
   obj.header = "NAmE";
   obj.rows = [];
+  obj.rows.push({
+  "label" : "js",
+  "value" : function (n) {
+  console.log(n);
+  console.log(this);
+  }
+  });
   tooltip.table()
   .width(180)
   .call (this, obj);

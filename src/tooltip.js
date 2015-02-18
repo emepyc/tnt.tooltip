@@ -125,6 +125,53 @@ var tooltip = function () {
     return t;
 };
 
+tooltip.list = function () {
+    // list tooltip is based on general tooltips
+    var t = tooltip();
+    var width = 180;
+
+    t.fill (function (obj) {
+	var tooltip_div = this;
+	var obj_info_list = tooltip_div
+	    .append("table")
+	    .attr("class", "tnt_zmenu")
+	    .attr("border", "solid")
+	    .style("width", t.width() + "px");
+
+	// Tooltip header
+	obj_info_list
+	    .append("tr")
+	    .attr("class", "tnt_zmenu_header")
+	    .append("th")
+	    .text(obj.header);
+
+	// Tooltip rows
+	var table_rows = obj_info_list.selectAll(".tnt_zmenu_row")
+	    .data(obj.rows)
+	    .enter()
+	    .append("tr")
+	    .attr("class", "tnt_zmenu_row");
+
+	table_rows
+	    .append("td")
+	    .html(function(d,i) {
+		return obj.rows[i].value;
+	    })
+	    .each(function (d) {
+		if (d.link === undefined) {
+		    return;
+		}
+		d3.select(this)
+		    .classed("link", 1)
+		    .on('click', function (d) {
+			d.link(d.obj);
+			t.close.call(this);
+		    });
+	    });
+    });
+    return t;
+};
+
 tooltip.table = function () {
     // table tooltips are based on general tooltips
     var t = tooltip();
@@ -164,7 +211,13 @@ tooltip.table = function () {
 	table_rows
 	    .append("td")
 	    .html(function(d,i) {
-		return obj.rows[i].value;
+		if (typeof obj.rows[i].value === 'function') {
+		    obj.rows[i].value.call(this, d);
+		    console.log(this);
+		    console.log(d);
+		} else {
+		    return obj.rows[i].value;
+		}
 	    })
 	    .each(function (d) {
 		if (d.link === undefined) {
@@ -207,6 +260,7 @@ tooltip.plain = function () {
 	    .append("td")
 	    .style("text-align", "center")
 	    .html(obj.body);
+
     });
 
     return t;
