@@ -8,7 +8,7 @@
   },
   "scripts": {
       "test": "gulp test",
-      "prepublish" : "gulp test && gulp build-browser-min"
+      "prepublish" : "gulp test && gulp build-browser"
   },
   "repository": {
     "type": "git",

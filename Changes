@@ -7,4 +7,6 @@
 	- Added List tooltip
 	- Allow functions on values
 	- Removed test coverage report
+	- Bugfix: scrollTop and scrollLeft fixed for IE
+
 
