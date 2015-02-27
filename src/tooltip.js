@@ -43,9 +43,12 @@ var tooltip = function () {
 	}
 
 	// Container element position (needed for "relative" positioned parents)
+	// ie has scrollTop and scrollLeft on documentElement instead of body
+	var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+	var scrollLeft = (document.documentElement && document.documentElement.scrollLeft) || document.body.scrollLeft;
 	var elemPos = containerElem.getBoundingClientRect();
-	var elemTop = elemPos.top + document.body.scrollTop;
-	var elemLeft = elemPos.left + document.body.scrollLeft;
+	var elemTop = elemPos.top + scrollTop;
+	var elemLeft = elemPos.left + scrollLeft;
 	
 	tooltip_div = d3.select(containerElem)
 	    .append("div")
