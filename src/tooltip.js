@@ -42,14 +42,6 @@ var tooltip = function () {
 	    return;
 	}
 
-	// Container element position (needed for "relative" positioned parents)
-	// ie has scrollTop and scrollLeft on documentElement instead of body
-	var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
-	var scrollLeft = (document.documentElement && document.documentElement.scrollLeft) || document.body.scrollLeft;
-	var elemPos = containerElem.getBoundingClientRect();
-	var elemTop = elemPos.top + scrollTop;
-	var elemLeft = elemPos.left + scrollLeft;
-	
 	tooltip_div = d3.select(containerElem)
 	    .append("div")
 	    .attr("class", "tnt_tooltip")
@@ -62,7 +54,7 @@ var tooltip = function () {
 	if ((d3.event === null) && (event)) {
 	    d3.event = event;
 	}
-	var mouse = [d3.event.pageX, d3.event.pageY];
+	var d3mouse = d3.mouse(containerElem);
 	d3.event = null;
 
 	var offset = 0;
@@ -74,8 +66,8 @@ var tooltip = function () {
 	
 	// We place the tooltip
 	tooltip_div
-	    .style("left", (mouse[0] - offset - elemLeft) + "px")
-	    .style("top", mouse[1] - elemTop + "px");
+	    .style("left", (d3mouse[0]) + "px")
+	    .style("top", (d3mouse[1]) + "px");
 
 	// Close
 	if (conf.show_closer) {
@@ -157,6 +149,7 @@ tooltip.list = function () {
 
 	table_rows
 	    .append("td")
+	    .style("text-align", "center")
 	    .html(function(d,i) {
 		return obj.rows[i].value;
 	    })
@@ -216,8 +209,6 @@ tooltip.table = function () {
 	    .html(function(d,i) {
 		if (typeof obj.rows[i].value === 'function') {
 		    obj.rows[i].value.call(this, d);
-		    console.log(this);
-		    console.log(d);
 		} else {
 		    return obj.rows[i].value;
 		}
