@@ -1,6 +1,6 @@
 {
   "name": "tnt.tooltip",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Tooltip library for TnT",
   "main": "index.js",
   "directories": {
@@ -16,7 +16,6 @@
   },
   "keywords": [
     "tnt",
-    "biojs",
     "tooltip",
     "javascript"
   ],

@@ -9,4 +9,8 @@
 	- Removed test coverage report
 	- Bugfix: scrollTop and scrollLeft fixed for IE
 
+0.0.8
+	- Removed from BioJS (-biojs tag in package.json)
+	- Needs a "relative" positioned parent
+	- Included "tnt" namespace for use in browsers
 
