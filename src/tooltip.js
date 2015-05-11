@@ -200,6 +200,18 @@ tooltip.table = function () {
 
 	table_rows
 	    .append("th")
+	    .attr("colspan", function (d, i) {
+		if (d.value === "") {
+		    return 2;
+		}
+		return 1;
+	    })
+	    .attr("class", function (d) {
+		if (d.value === "") {
+		    return "tnt_zmenu_inner_header";
+		}
+		return "tnt_zmenu_cell";
+	    })
 	    .html(function(d,i) {
 		return obj.rows[i].label;
 	    });
@@ -211,6 +223,11 @@ tooltip.table = function () {
 		    obj.rows[i].value.call(this, d);
 		} else {
 		    return obj.rows[i].value;
+		}
+	    })
+	    .each(function (d) {
+		if (d.value === "") {
+		    d3.select(this).remove();
 		}
 	    })
 	    .each(function (d) {
