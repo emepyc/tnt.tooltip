@@ -1,14 +1,14 @@
 {
   "name": "tnt.tooltip",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Tooltip library for TnT",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-      "test": "gulp test",
-      "prepublish" : "gulp test && gulp build-browser"
+    "test": "gulp test",
+    "prepublish": "gulp test && gulp build-browser"
   },
   "repository": {
     "type": "git",
@@ -44,7 +44,7 @@
     "gulp-watch": "^1.0.2",
     "tnt.api": "^0.0.0"
   },
-  "dependencies" : {
-     "tnt.api": "^0.0.0"
+  "dependencies": {
+    "tnt.api": "^0.0.0"
   }
 }
