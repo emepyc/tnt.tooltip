@@ -7,8 +7,6 @@ var tooltip = function () {
     var tooltip_div;
 
     var conf = {
-	background_color : "white",
-	foreground_color : "black",
 	position : "right",
 	allow_drag : true,
 	show_closer : true,
