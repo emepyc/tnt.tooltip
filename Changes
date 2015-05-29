@@ -17,3 +17,6 @@
 0.0.9
 	- In tables tooltip if "value" is empty, treat the row as an inner header
 
+0.0.10
+	- Make 'header' optional (not rendered if not present) in plain, list and table tooltips
+	- Removed the inlined "closer" png and substituted by a CSS "X"
