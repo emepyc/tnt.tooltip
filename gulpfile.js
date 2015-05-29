@@ -33,8 +33,11 @@ var outputFileMin = join(buildDir,outputFileMinSt);
 gulp.task('default', ['lint', 'test', 'build-browser', 'build-browser-gzip']);
 
 gulp.task('sass', function () {
-    return gulp.src('./src/scss/*scss')
-	.pipe(sass())
+    return gulp.src("index.scss")
+	.pipe(sass({
+	    errLogToConsole: true
+	}))
+	.pipe(rename('tooltip.css'))
 	.pipe(gulp.dest(buildDir));
 });
 
@@ -52,7 +55,7 @@ gulp.task('test', function () {
 
 
 gulp.task('watch', function() {
-    gulp.watch(['./src/**/*.js','./lib/**/*.js', './test/**/*.js'], ['build-browser', 'lint', 'test']);
+    gulp.watch(['./src/**/*.js','./src/scss/**/*.scss', './test/**/*.js'], ['build-browser', 'lint', 'test']);
 });
 
 
