@@ -20,3 +20,6 @@
 0.0.10
 	- Make 'header' optional (not rendered if not present) in plain, list and table tooltips
 	- Removed the inlined "closer" png and substituted by a CSS "X"
+
+0.0.11
+	- updated dependencies
