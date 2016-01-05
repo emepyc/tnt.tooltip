@@ -55,8 +55,6 @@
         .attr("r", 50)
         .attr("fill", "red")
         .on("click", function (d) {
-            console.log(this);
-            console.log(d3.select(this));
             custom_tooltip.call(this, d);
         });
     </script>
