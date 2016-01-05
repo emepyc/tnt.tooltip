@@ -26,4 +26,5 @@
 0.1.0
 	- fill is passed the container DOM element and not the d3 selection
 	- bugfix: position left was not working
+	- css file renamed to tnt.tooltip.css
 

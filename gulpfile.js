@@ -37,7 +37,7 @@ gulp.task('sass', function () {
 	.pipe(sass({
 	    errLogToConsole: true
 	}))
-	.pipe(rename('tooltip.css'))
+	.pipe(rename(outputFile + '.css'))
 	.pipe(gulp.dest(buildDir));
 });
 
