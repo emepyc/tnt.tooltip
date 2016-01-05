@@ -3,7 +3,7 @@ port: 4001
 safe: true
 baseurl : /tnt.tooltip
 api :
-    - name : Tooltip
+    - name : tooltip
       elements :
            - name : Tooltips
              preamble : |
