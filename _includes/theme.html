@@ -3,11 +3,85 @@
 {% case page.theme %}
   {% when 'front' %}
      <script src={{ site.baseurl }}/themes/front.js></script>
+     <style>
+     .tnt_zmenu_header {
+         background-color: steelblue;
+         color : white;
+     }
+     </style>
+
      <script>
        (function () {
-           var vis = tnt();
-           var theme = tnt_theme()
-           theme(vis, document.getElementById('mydiv'));
+           var t = function (data) {
+               var obj = {};
+               obj.header = "Circle";
+
+               obj.rows = [];
+               obj.rows.push({
+                   "label" : "Coords",
+                   "value" : ""
+               });
+               obj.rows.push({
+                   "label" : "x",
+                   "value" : data.x
+               });
+               obj.rows.push({
+                   "label" : "y",
+                   "value" : data.y
+               });
+               obj.rows.push({
+                   "label" : "Other",
+                   "value" : ""
+               })
+               obj.rows.push({
+                   "label" : "shape",
+                   "value" : "circle"
+               });
+               obj.rows.push({
+                   "label" : "color",
+                   "value" : data.color
+               })
+               obj.rows.push({
+                   "label" : "radius",
+                   "value" : data.r
+               })
+               tooltip.table()
+                   .width(180)
+                   .call (this, obj);
+           };
+
+           var data = [
+               {x:150, y:150, r:50, color:"red"},
+               {x:420,  y:88, r:70, color:"steelblue"},
+               {x:410, y:260, r:14, color:"green"},
+               {x:61,  y:120, r:34, color:"orange"},
+               {x:630, y:150, r:29, color:"brown"}
+           ]
+
+           var svg = d3.select("#mydiv")
+               .append("svg")
+               .attr("width", 700)
+               .attr("height", 300);
+
+           svg
+               .selectAll("circle")
+               .data(data)
+               .enter()
+               .append("circle")
+               .attr("cx", function (d) {
+                   return d.x;
+               })
+               .attr("cy", function (d) {
+                   return d.y;
+               })
+               .attr("r", function (d) {
+                   return d.r;
+               })
+               .attr("fill", function (d) {
+                   return d.color;
+               })
+               .on("click", t);
+
        })();
      </script>
 {% endcase %}
