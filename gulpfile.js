@@ -9,7 +9,7 @@ var sass = require("gulp-sass");
 
 // gulp helper
 var gzip = require('gulp-gzip');
-var clean = require('gulp-rimraf');
+var del = require('del');
 var rename = require('gulp-rename');
 
 // path tools
@@ -61,13 +61,13 @@ gulp.task('watch', function() {
 
 // will remove everything in build
 gulp.task('clean', function() {
-  return gulp.src(buildDir).pipe(clean());
+    return del([buildDir]);
 });
 
 // just makes sure that the build dir exists
 gulp.task('init', ['clean'], function() {
   mkdirp(buildDir, function (err) {
-    if (err) console.error(err)
+    if (err) console.error(err);
   });
 });
 
@@ -87,12 +87,10 @@ gulp.task('build-browser-min',['init', 'sass'], function() {
   .pipe(rename(outputFileMinSt))
   .pipe(gulp.dest(buildDir));
 });
- 
+
 gulp.task('build-browser-gzip', ['build-browser-min', 'sass'], function() {
   return gulp.src(outputFileMin)
     .pipe(gzip({append: false, gzipOptions: { level: 9 }}))
     .pipe(rename(outputFile + ".min.gz.js"))
     .pipe(gulp.dest(buildDir));
 });
-
-
