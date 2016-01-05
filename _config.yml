@@ -73,62 +73,67 @@ api :
                             });
 
                 - name : position
-                  path : tnt.tooltip
+                  path : tooltip
                   args : string
                   desc : sets the relative position of the tooltip with respect to the mouse
-                  full : Sets the relative position of the tooltip with respect to the mouse. Possible values are "left" and "right". By default, "right" positioning is used and the left upper corner of the tooltip is positioned where the mouse is. If call without arguments, returns the current positioning value.
+                  full : Sets the relative position of the tooltip with respect to the mouse. Possible values are "left" and "right" (by default). If call without arguments returns the current positioning value.
                   example : |
-                         var tooltip = tnt.tooltip.table()
-                                         .position ("left");
+                    var tooltip = tnt.tooltip.table()
+                        .position ("left");
 
                 - name : allow_drag
-                  path : tnt.tooltip
+                  path : tooltip
                   args : boolean
-                  desc : determines if the tooltip is draggable or not
-                  full : Determines if the tooltip is draggable or not. By default, this option is set to <i>true</i>. If no argument is provided, returns the current value.
+                  desc : sets if the tooltip is <i>draggable</i> or not
+                  full : Sets if the tooltip is <i>draggable</i> or not. By default, this option is set to <i>true</i>. If no argument is provided returns the current value.
                   example : |
-                          var tooltip = tnt.tooltip.table()
-                                          .allow_drag (false);
+                    var tooltip = tnt.tooltip.table()
+                        .allow_drag (false);
+
                 - name : show_closer
-                  path : tnt.tooltip
+                  path : tooltip
                   args : boolean
-                  desc : determines if the closing cross is displayed
-                  full : Determines if the closing cross is displayed on the tooltip. If set to false, the tooltip can not be closed directly by the user (clicking on the cross), but only programmatically calling the <a href="#close">close</a> method. By default this option is set to <i>true</i>. If called without arguments, the current value is returned.
+                  desc : sets if the tooltip can be closed manually
+                  full : Sets if the tooltip can be closed manually. If set to <i>false</i> the tooltip can not be closed directly by the user (clicking on the cross), but only programmatically calling the <a href="#close">close</a> method. By default this option is set to <i>true</i>. If called without arguments, the current value is returned.
                   example : |
-                         var tooltip = tnt.tooltip.table()
-                                         .show_closer (false);
+                    var tooltip = tnt.tooltip.table()
+                        .show_closer (false);
+
                 - name : width
-                  path : tnt.tooltip
+                  path : tooltip
                   args : integer
                   desc : sets the minimum width of the tooltip
-                  full : Sets the minimum width of the tooltip. This width is not enforced if elements inside of the tooltip (like images) have greater <i>width</i>. The numeric argument determines the width in pixels. If called without arguments, returns the current value of this method
+                  full : Sets the minimum width of the tooltip. This width is not enforced if elements inside of the tooltip (like images) have greater <i>width</i>. The numeric argument determines the width in pixels. If called without arguments returns the current value.
                   example : |
-                          var tooltip = tnt.tooltip.table()
-                                          .width (200) // 200 pixels
+                    var tooltip = tnt.tooltip.table()
+                        .width (200) // 200 pixels
+
                 - name : id
-                  path : tnt.tooltip
+                  path : tooltip
                   args : integer | string
                   desc : sets an id for the tooltip
-                  full : Sets an id for the tooltip. This controls the number of tooltips that can be displayed simultaneously in the same page. Everytime a tooltip is created, any previous tooltips with the same <i>id</i> is removed. This is typically used to allow different tooltips to co-exist in the same page or restrict their number. For example, if the <i>id</i> is always set to the same value, everytime a tooltip is created any previous tooltip is destroyed. Another option is to have a different <i>id</i> per different type of element in the page, allowing only one type of tooltip per element. If called without arguments, the current <i>id</i> of the tooltip is returned
+                  full : Sets an id for the tooltip. This controls the number of tooltips that can be displayed simultaneously in the same page. Everytime a tooltip is created, any previous tooltips with the same <i>id</i> are removed. For example, if the <i>id</i> is always set to the same value, everytime a tooltip is created any previous tooltip is destroyed. If called without arguments the current <i>id</i> of the tooltip is returned.
                   example : |
-                           var myTooltip = function (data) {
-                             var obj = {};
-                             obj.header = "Circle";
-                             obj.rows = [];
-                             obj.rows.push ({
-                                 "label" : "type",
-                                 "value" : data.type
-                             });
-                             tnt.tooltip.table()
-                                 .width (200)
-                                 .id (data.type)
-                                 .call (this, obj);
-                           };
+                    var myTooltip = function (data) {
+                        var obj = {};
+                        obj.header = "Circle";
+                        obj.rows = [];
+                        obj.rows.push ({
+                            "label" : "type",
+                            "value" : data.type
+                        });
+
+                        tnt.tooltip.table()
+                            .width (200)
+                            .id (data.type)
+                            .call (this, obj);
+                    };
+
                 - name : fill
-                  path : tnt.tooltip
+                  path : tooltip
                   args : callback
-                  desc : specifies the rendering of the tooltip
-                  full : This method specifies the rendering of the tooltip. The callback is run passing the container element as a d3 selection as <i>this</i> and the data obj as the argument. See <a href="#table">tnt.tooltip.table</a> or <a href="#plain">tnt.tooltip.plain</a> for examples of how to use this method. If called without arguments, the current callback is returned
+                  desc : specifies how to render the tooltip content
+                  full : This method specifies the how to render the tooltip content. The callback is run passing the container element as <i>this</i> and the data obj as its argument. See <a href="#table">tnt.tooltip.table</a> or <a href="#plain">tnt.tooltip.plain</a> for examples of use of this method. If called without arguments, the current callback is returned
                   example : |
                         var custom_tooltip = tnt.tooltip()
                             .width(150)
@@ -181,5 +186,34 @@ api :
                 - name : plain
                   path : tnt.tooltip
                   args : null
-                  desc : tooltips showing data in a loosely structured way
-                  full : Returns a tooltip that accept a data object consisting in two fields, <i>header</i> and <i>body</i>. The former typically contains a string that will be used as the header of the tooltip. The latter will be rendered as the body of the tooltip and can contain any valid html
+                  desc : tooltips for non-structured data
+                  full : Tooltips for non-structured data. Returns a tooltip that accepts a data object consisting of two fields, <i>header</i> and <i>body</i>. The former typically contains a string that will be used as the header of the tooltip. The latter will be rendered as the body of the tooltip and centered. The <i>body</i> can contain any valid html. The returned <i>tooltip</i> also has all the methods previously described for general <a href="#tooltip">tooltips</a>.
+                  example: |
+                    tnt.tooltip.plain()
+                        .id(data.name)
+                        .width(150)
+                        .call(element, {
+                            header: "Help"
+                            body: "<img src=myImg.png width=30/>"
+                        });
+
+                - name : table
+                  path : tnt.tooltip
+                  args : null
+                  desc : tooltip rendered as a table
+                  full : Tooltip rendered as a table. Returns a tooltip that accepts a data object that is expected to have two fields, <i>header</i> that typically contains a string that is display at the top of the tooltip and <i>rows</i> that contains an array of objects each containing a <i>label</i> and <i>value</i> field. These object data is displayed in the tooltip in a form of a 2-columns table. If a row object has an empty <i>value</i> the corresponding <i>label</i> will span the two columns of the row. The returned <i>tooltip</i> also has all the methods previously described for general <a href=#tooltip>tooltips</a>.
+                  example : |
+                    var myTooltip = function (data) {
+                        var obj = {};
+                        obj.header = "Circle";
+                        obj.rows = [];
+                        obj.rows.push ({
+                            "label" : "type",
+                            "value" : data.type
+                        });
+
+                        tnt.tooltip.table()
+                            .width (200)
+                            .id (data.type)
+                            .call (this, obj);
+                    };
