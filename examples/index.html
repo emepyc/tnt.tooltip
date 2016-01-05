@@ -1,0 +1,38 @@
+---
+layout : default
+title : TnT Examples
+type : examples
+gists :
+   - title : Table tooltip
+     category : t
+     description : Example showing a table-based tooltip
+     id : 7b15891ac570f7a759bd
+
+   - title : IDs
+     category : t
+     description : Example showing how different IDs affect the displayed tooltips
+     id : fe6dc27fe84ba26fff13
+
+   - title : Custom filling
+     category : t
+     description : Example showing how to create a tooltip using the generic tooltip interface
+     id : b5217a146bcf66d15a2a
+
+   - title : Mouseover tooltip
+     category : t
+     description : Example showing how to create a <i>mouseover</i> tooltip
+     id : 55b45c2b0b58aac771d8
+
+   - title : Async info
+     category : t
+     description : Example showing how to display a tooltip with information retrieved asynchronously
+     id : 84014fb158cedea31a01
+
+---
+
+<p>The following list of examples are available</p>
+<ul>
+{% for gist in page.gists %}
+<li><a href=http://bl.ocks.org/emepyc/{{ gist.id }}>{{ gist.description }}</a></li>
+{% endfor %}
+</ul>
