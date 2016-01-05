@@ -56,16 +56,16 @@ var tooltip = function () {
         var d3mouse = d3.mouse(containerElem);
         d3.event = null;
 
-        var offset = 0;
+        var xoffset = 0;
         if (conf.position === "left") {
-            offset = conf.width;
+            xoffset = conf.width;
         }
 
         tooltip_div.attr("id", "tnt_tooltip_" + conf.id);
 
         // We place the tooltip
         tooltip_div
-            .style("left", (d3mouse[0]) + "px")
+            .style("left", (d3mouse[0] - xoffset) + "px")
             .style("top", (d3mouse[1]) + "px");
 
         // Close
