@@ -42,23 +42,35 @@ api :
                   desc : creates a new tooltip instance
                   full : Creates a new tooltip instance that can be configured with the methods explained below. It returns a function that has to be called with <i>this</i> set to the DOM element the tooltip is attached to and the <i>data</i> to display in the tooltip. This generic tooltip object only knows how to position the tooltip in the page and creates the DOM elements appropriately, but it does not know about how to render or display the data. See below for specific tooltips that format the data in specific ways (like tables or lists)
                   example : |
-                    var data = {
-                        "header" : "tooltip header",
-                        "rows" : [{
-                            "label" : "color",
-                            "value" : "blue"
-                        }]
-                    };
+                        var custom_tooltip = tnt.tooltip()
+                            .width(150)
+                            .fill (function (data) {
+                                // The DOM element is passed as "this"
+                                var container = d3.select(this);
 
-                    var fill_cbak = function (data) {
-                    // ...
-                    };
+                                var table = container
+                                    .append("table")
+                                    .attr("class", "tnt_zmenu")
+                                    .attr("border", "solid")
+                                    .style("width", custom_tooltip.width() + "px");
 
-                    tnt.tooltip()
-                        .width (200)
-                        .id (1)
-                        .fill (fill_cbak)
-                        .call (this, obj);
+                                if (data.header) {
+                                    table
+                                        .append("tr")
+                                        .attr("class", "tnt_zmenu_header")
+                                        .append("th")
+                                        .text(data.header);
+                                }
+
+                                if (data.body) {
+                                    table
+                                        .append("tr")
+                                        .attr("class", "tnt_zmenu_row")
+                                        .append("td")
+                                        .style("text-align", "center")
+                                        .html(data.body);
+                                }
+                            });
 
                 - name : position
                   path : tnt.tooltip
@@ -118,26 +130,54 @@ api :
                   desc : specifies the rendering of the tooltip
                   full : This method specifies the rendering of the tooltip. The callback is run passing the container element as a d3 selection as <i>this</i> and the data obj as the argument. See <a href="#table">tnt.tooltip.table</a> or <a href="#plain">tnt.tooltip.plain</a> for examples of how to use this method. If called without arguments, the current callback is returned
                   example : |
-                           var t = tnt.tooltip()
-                                   .width (200)
-                                   .fill (function (data) {
-                                       var container = this;
+                        var custom_tooltip = tnt.tooltip()
+                            .width(150)
+                            .fill (function (data) {
+                                // The DOM element is passed as "this"
+                                var container = d3.select(this);
 
-                                       var table = container
-                                            .append ("table")
-                                            .style ("width", t.width() + "px");
+                                var table = container
+                                    .append("table")
+                                    .attr("class", "tnt_zmenu")
+                                    .attr("border", "solid")
+                                    .style("width", custom_tooltip.width() + "px");
 
-                                       table
-                                            .append ("tr")
-                                            .append ("th")
-                                            .text (data.header);
+                                if (data.header) {
+                                    table
+                                        .append("tr")
+                                        .attr("class", "tnt_zmenu_header")
+                                        .append("th")
+                                        .text(data.header);
+                                }
 
-                                       table
-                                            .append ("tr")
-                                            .append ("td")
-                                            .style ("text-align", "center")
-                                            .html (data.body);
-                                   });
+                                if (data.body) {
+                                    table
+                                        .append("tr")
+                                        .attr("class", "tnt_zmenu_row")
+                                        .append("td")
+                                        .style("text-align", "center")
+                                        .html(data.body);
+                                }
+                            });
+
+
+                        d3.select("#container")
+                            .append("svg")
+                            .attr("width", 300)
+                            .attr("height", 300)
+                            .append("circle")
+                            .datum({
+                                header:"this is the header",
+                                body:"this is the body"
+                            })
+                            .attr("cx", 150)
+                            .attr("cy", 150)
+                            .attr("r", 50)
+                            .attr("fill", "red")
+                            .on("click", function (d) {
+                                custom_tooltip.call(this, d);
+                            });
+
                 - name : plain
                   path : tnt.tooltip
                   args : null
