@@ -1,0 +1,100 @@
+---
+layout : default
+title : TnT Tooltip
+type : overview
+theme : front
+---
+
+<h2>Tooltip library for TnT</h2>
+{% include theme.html %}
+
+<p><aside>See <a href={{ site.baseurl }}/examples/>more examples</a></aside></p>
+
+<h2><a name="introduction" href="#introduction">#</a>Introduction</h2>
+<p><b>TnT Tooltip</b> is a basic tooltip library for <a href="http://emepyc.github.io/tnt/">TnT</a> although it is not restricted to <a href="http://emepyc.github.io/tnt/">TnT</a> and can be used on its own. Although it is very flexible and light, this library has not been developed as a general fully-featured tooltip library that matches all possible scenarios. The main characteristics of TnT Tooltip are:</p>
+<h3>Pros</h3>
+<ul>
+    <li>Easy integration with other TnT libraries</li>
+    <li>Easy integration with SVG based visualisations and <a href="http://d3js.org">d3js</a></li>
+    <li>Light and flexible with powerful API</li>
+</ul>
+<h3>Cons</h3>
+<ul>
+    <li>Requires an <i>anchor</i> DOM element <i>css-relative</i>-positioned</li>
+    <li>Some of the examples require the developer some coding. See the <a href={{ site.baseurl }}/examples/>examples page</a></li>
+</ul>
+
+<h2><a name="Example" href="#Example">#</a>Example</h2>
+
+{% highlight html linenos %}
+<div id="container" style="position:relative" ></div>
+{% endhighlight %}
+
+{% highlight javascript linenos %}
+var t = function (data) {
+     var obj = {};
+     obj.header = data.name;
+     obj.rows = [];
+     obj.rows.push({
+         "label" : "type",
+         "value" : data.type
+     });
+     tooltip.table()
+         .width(180)
+         .call (this, obj);
+ };
+
+ d3.select("#container") // div element
+     .append("svg")
+     .attr("width", 300)
+     .attr("height", 300)
+     .append("circle")
+     .datum({name:"this is me", type:"this is my type"})
+     .attr("cx", 150)
+     .attr("cy", 150)
+     .attr("r", 50)
+     .attr("fill", "red")
+     .on("click", t);
+{% endhighlight %}
+
+<p>The above example creates a new <i>div</i> element as the visualisation container. This <i>anchor</i> DOM element needs to be <i>relative-positioned</i>. The example then appends a SVG to this <i>div</i> element and a circle with some <i>data</i> using <a href="http://d3js.org">d3js</a>. When this circle is <i>clicked</i>, a new tooltip is created and its data displayed in the tooltip.</p>
+
+<h2><a name="Installation" href="#Installation">#</a>Installation</h2>
+<p>TnT Tooltip can be used linking to the library directly. It depends on <a href="d3js.org">d3.js</a> and this library needs to be linked before TnT Tooltip.</p>
+
+{% highlight html linenos %}
+<!-- D3 -->
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<!-- TnT Tooltip-->
+<link rel="stylesheet" href="http://emepyc.github.io/tnt/build/tnt.tooltip.css" type="text/css" />
+<script src="http://emepyc.github.io/tnt/build/tnt.tooltip.min.js" charset="utf-8"></script>
+{% endhighlight %}
+
+<p>It is also possible to install the source code and build the library locally:</p>
+<ul>
+    <li>
+        Using <b>npm</b>:
+        {% highlight bash %}
+npm install tnt.tooltip
+        {% endhighlight %}
+    </li>
+    <li>
+        Building from <b>Git</b>:
+        {% highlight bash %}
+git clone https://github.com/emepyc/tnt.tooltip
+cd tnt.tooltip
+npm install
+npm build-browser
+        {% endhighlight %}
+    </li>
+</ul>
+
+
+<h2><a name="Browsers" href="#Browsers">#</a>Browser support</h2>
+<p>TnT works on HTML5, CSS3 and SVG-compliant browsers, which generally means any "modern browser". The TnT library and the other TnT-related libraries are tested regularly against Chrome (Chromium) and major changes are regularly tested in recent versions of Firefox, Safari (Webkit) and Opera. It has been also tested in IE versions 9+. If you find any problem, please <a href="https://github.com/emepyc/tnt.tooltip/issues">let me know</a>.</p>
+
+<p>The TnT Tooltip library depends only on the <a href="http://d3js.org">D3.js</a> library. Check its <a href="https://github.com/mbostock/d3/wiki#browser--platform-support">browser's compatibility note</a> for more information.</p>
+
+<h2><a name="Feedback" href="#Feedback">#</a>Feedback</h2>
+<p>Please, send any feedback to <a href="mailto:emepyc@gmail.com">emepyc@gmail.com</a>. Bug reports and feature requests are also welcome <a href="https://github.com/emepyc/tnt.tooltip/issues">here</a>

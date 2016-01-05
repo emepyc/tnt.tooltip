@@ -1,0 +1,13 @@
+<div id="mydiv"></div>
+
+{% case page.theme %}
+  {% when 'front' %}
+     <script src={{ site.baseurl }}/themes/front.js></script>
+     <script>
+       (function () {
+           var vis = tnt();
+           var theme = tnt_theme()
+           theme(vis, document.getElementById('mydiv'));
+       })();
+     </script>
+{% endcase %}
