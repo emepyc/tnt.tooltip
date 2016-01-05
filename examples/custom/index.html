@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../build/tooltip.css"/>
+    <script src="../../build/tnt.tooltip.js"></script>
+</head>
+
+<body>
+    <div id="container" style="padding:30px; position:relative" ></div>
+
+    <script>
+    var custom_tooltip = tnt.tooltip()
+        .width(150)
+        .fill (function (data) {
+            // The DOM element is passed as "this"
+            var container = d3.select(this);
+
+            var table = container
+                .append("table")
+                .attr("class", "tnt_zmenu")
+                .attr("border", "solid")
+                .style("width", custom_tooltip.width() + "px");
+
+            if (data.header) {
+                table
+                    .append("tr")
+                    .attr("class", "tnt_zmenu_header")
+                    .append("th")
+                    .text(data.header);
+            }
+
+            if (data.body) {
+                table
+                    .append("tr")
+                    .attr("class", "tnt_zmenu_row")
+                    .append("td")
+                    .style("text-align", "center")
+                    .html(data.body);
+            }
+        });
+
+
+    d3.select("#container")
+        .append("svg")
+        .attr("width", 300)
+        .attr("height", 300)
+        .append("circle")
+        .datum({
+            header:"this is the header",
+            body:"this is the body"
+        })
+        .attr("cx", 150)
+        .attr("cy", 150)
+        .attr("r", 50)
+        .attr("fill", "red")
+        .on("click", function (d) {
+            console.log(this);
+            console.log(d3.select(this));
+            custom_tooltip.call(this, d);
+        });
+    </script>
+</body>
