@@ -8,10 +8,24 @@
          background-color: steelblue;
          color : white;
      }
+     svg {
+         background-color: #EEEEFF;
+         -webkit-border-radius: 15px;
+         -moz-border-radius: 15px;
+         border-radius: 15px;
+     }
+     #mydiv {
+         position: relative;
+     }
+     .tnt_zmenu_header_plain {
+         pointer-events: none;
+     }
      </style>
 
      <script>
        (function () {
+           var h;
+
            var t = function (data) {
                var obj = {};
                obj.header = "Circle";
@@ -47,6 +61,7 @@
                })
                tooltip.table()
                    .width(180)
+                   .id("table")
                    .call (this, obj);
            };
 
@@ -80,7 +95,20 @@
                .attr("fill", function (d) {
                    return d.color;
                })
-               .on("click", t);
+               .on("click", t)
+               .on("mouseover", function (d) {
+                   h = tnt.tooltip.plain()
+                    .id("plain")
+                    .width(180)
+                    .show_closer(false)
+                    .call (this, {
+                        header: "",
+                        body: "circle: " + d.x + "," + d.y + ":" + d.r + " (" + d.color + ")"
+                    })
+               })
+               .on("mouseout", function () {
+                   h.close();
+               })
 
        })();
      </script>
