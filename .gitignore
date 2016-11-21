@@ -6,3 +6,4 @@ coverage/lcov.info
 _site
 Gemfile.lock
 .idea
+npm-debug.log
