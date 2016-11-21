@@ -28,3 +28,6 @@
 	- bugfix: position left was not working
 	- css file renamed to tnt.tooltip.css
 
+0.2.0
+        - starting following sermver
+        - Added custom container option

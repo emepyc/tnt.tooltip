@@ -7,6 +7,7 @@ var tooltip = function () {
     var tooltip_div;
 
     var conf = {
+        container: undefined,
         position : "right",
         allow_drag : true,
         show_closer : true,
@@ -35,10 +36,13 @@ var tooltip = function () {
         // It looks like if we anchor the tooltip in the "body"
         // The tooltip is not located in the right place (appears at the bottom)
         // See clients/tooltips_test.html for an example
-        var containerElem = selectAncestor (this, "div");
-        if (containerElem === undefined) {
-            // We require a div element at some point to anchor the tooltip
-            return;
+        var containerElem = conf.container;
+        if (!containerElem) {
+            containerElem = selectAncestor(this, "div");
+            if (containerElem === undefined) {
+                // We require a div element at some point to anchor the tooltip
+                return;
+            }
         }
 
         tooltip_div = d3.select(containerElem)
