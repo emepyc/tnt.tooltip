@@ -4,3 +4,7 @@ node_modules
 coverage/lcov.info
 .sass-cache/
 _site
+.idea/
+Gemfile.lock
+npm-debug.log
+				
