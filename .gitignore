@@ -5,3 +5,4 @@ coverage/lcov.info
 .sass-cache/
 _site
 Gemfile.lock
+.idea
