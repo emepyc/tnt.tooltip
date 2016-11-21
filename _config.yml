@@ -129,6 +129,18 @@ api :
                             .call (this, obj);
                     };
 
+                - name : container
+                  path : tooltip
+                  args : DOM_element
+                  desc : specifies the DOM element to anchor the tooltip
+                  full : Species the DOM element to anchor the tooltip. By default the tooltip is anchored in the first <i>div</i> element found up the DOM hierarchy is used, by using this method it is possible to define an alternative DOM element. Remember that the anchor element has to be <i>"relative" positioned</i>
+                  example : |
+                        tnt.tooltip.table()
+                          .width (200)
+                          .id(data.type)
+                          .container(document.getElementById("mycontainer")); // <div id=mycontainer style="position:relative"></div>
+                          .call(...);
+
                 - name : fill
                   path : tooltip
                   args : callback
