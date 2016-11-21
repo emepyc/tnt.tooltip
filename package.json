@@ -1,6 +1,6 @@
 {
   "name": "tnt.tooltip",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Tooltip library for TnT",
   "main": "index.js",
   "directories": {
