@@ -3,7 +3,7 @@ var apijs = require("tnt.api");
 var tooltip = function () {
     "use strict";
 
-    var drag = d3.behavior.drag();
+    var drag = d3.drag();
     var tooltip_div;
 
     var conf = {
@@ -18,7 +18,7 @@ var tooltip = function () {
 
     var t = function (data, event) {
         drag
-            .origin(function(){
+            .subject(function(){
                 return {
                     x : parseInt(d3.select(this).style("left")),
                     y : parseInt(d3.select(this).style("top"))
