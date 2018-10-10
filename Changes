@@ -31,3 +31,6 @@
 0.2.0
         - starting following sermver
         - Added custom container option
+
+1.0.0
+        - Using d3.v5 (this version does not work with d3 v3)
